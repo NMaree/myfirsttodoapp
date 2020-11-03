@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: Todo List
+  description: An API to illustrate all the routes
+  version: 1.0.0
+servers:
+#  the various servers we can use in the ui dropdown
+ 
+paths:
+  /todos:
+    get:
+      description: Returns a list of all my todos
+      responses:
+        '200':
+          description: A JSON array of todos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todos'
+         
+    post:
+      description: Create a new todo
+      responses:
+        '200':
+          description: An object of new todo
+          content: {}
+      requestBody:
+        description: Add a new todo
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/todo'
+         
+  /todos/{todo_id}:
+    get:
+      description: Returns a todo by todo_id.
+      parameters:
+        - name: todo_id
+          in: path
+          required: true
+          description: Todo by todo_id.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: List a todo by todo_id.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+         
+    put:
+      description: Update a todo
+      parameters:
+        - name: todo_id
+          in: path
+          required: true
+          description: Update a todo
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: An object of updated todo
+          content: {}
+      requestBody:
+        description: Add a updated todo
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/todo'
+         
+    delete:
+      description: Delete a todo
+      parameters:
+        - name: todo_id
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '204':
+          description: Delete todo
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo'
+          
+components:
+  schemas:
+    todos:
+      type: array
+      items:
+        type: object
+        properties:
+          description:
+            type: string
+    todo:
+      type: object
+      properties:
+          description:
+            type: string 
+          todo_id:
+            type: integer
+  
+    
+    
+    
+
+  
+        
+              
